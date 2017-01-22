@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".views.LoginActivity">
+    tools:context=".views.RegistrationActivity">
 
     <TextView
         android:layout_width="wrap_content"
@@ -21,7 +21,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/txtEmailLogin"
+        android:id="@+id/txtEmailRegistration"
         android:layout_below="@+id/textView"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true" />
@@ -32,7 +32,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Password"
         android:id="@+id/textView2"
-        android:layout_below="@+id/txtEmailLogin"
+        android:layout_below="@+id/txtEmailRegistration"
         android:layout_alignParentStart="true" />
 
     <EditText
@@ -40,17 +40,18 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
-        android:id="@+id/txtPasswordLogin"
+        android:id="@+id/txtPasswordRegistration"
         android:layout_below="@+id/textView2"
         android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/txtEmailLogin" />
+        android:layout_alignEnd="@+id/txtEmailRegistration" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login"
-        android:id="@+id/btnUserLogin"
-        android:onClick="btnUserLogin_Click"
-        android:layout_below="@+id/txtPasswordLogin"
+        android:text="Registration"
+        android:id="@+id/btnRegistrationUser"
+        android:onClick="btnRegistrationUser_Click"
+        android:layout_below="@+id/txtPasswordRegistration"
         android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
