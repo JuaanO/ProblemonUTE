@@ -1,6 +1,7 @@
 package com.problemonute.problemonute.models;
 
 
+import java.util.List;
 
 /**
  * Created by Hercson on 6/1/2017.
@@ -12,7 +13,6 @@ public class Question {
     private long points;
     private int difficulty_level;
     private String category;
-    //private ArrayList<Answer> answers;
 
     public Question() {
     }
