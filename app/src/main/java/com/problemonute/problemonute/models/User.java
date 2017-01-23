@@ -10,7 +10,7 @@ public class User implements Serializable {
 
     private String username;
     private String gender;
-    private int score;
+    private long score;
 
     public User(){
 
@@ -38,11 +38,11 @@ public class User implements Serializable {
         this.gender = gender;
     }
 
-    public int getScore() {
+    public long getScore() {
         return score;
     }
 
-    public void setScore(int score) {
+    public void setScore(long score) {
         this.score = score;
     }
 }

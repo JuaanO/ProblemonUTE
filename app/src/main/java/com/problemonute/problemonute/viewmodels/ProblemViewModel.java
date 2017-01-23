@@ -1,7 +1,11 @@
 package com.problemonute.problemonute.viewmodels;
 
+import android.content.Context;
 import android.databinding.ObservableField;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,15 +23,8 @@ import java.util.Random;
  */
 
 public class ProblemViewModel {
-    private User usr;
-    private Question q;
-    private Answer a1;
-    private Answer a2;
-    private Answer a3;
-    private Answer a4;
+
     private static final String TAGLOG = "firebase-db";
-    private static final Random rnd = new Random();
-    private static int randChild = (int)(rnd.nextDouble() * 20 + 1);
     private final ObservableField<User> user = new ObservableField<>();
     private final ObservableField<Question> question = new ObservableField<>();
     private final ObservableField<Answer> answer1 = new ObservableField<>();
@@ -39,22 +36,6 @@ public class ProblemViewModel {
 
     }
 
-    public ProblemViewModel(User user){this.user.set(user);}
-
-    public ProblemViewModel(Question question) {
-        this.question.set(question);
-    }
-
-    public ProblemViewModel(Answer answer1, Answer answer2, Answer answer3, Answer answer4) {
-        this.answer1.set(answer1);
-        this.answer2.set(answer2);
-        this.answer3.set(answer3);
-        this.answer4.set(answer4);
-    }
-
-    public ObservableField<User> getUser(){
-        return user;
-    }
     public ObservableField<Question> getQuestion() {
         return question;
     }
@@ -71,32 +52,6 @@ public class ProblemViewModel {
         return answer4;
     }
 
-    public void setUser(User user){
-        this.user.set(user);
-    }
-    public void setQuestion(Question question){
-        this.question.set(question);
-    }
-    public void setAnswer1(Answer answer1){
-        this.answer1.set(answer1);
-    }
-    public void setAnswer2(Answer answer2){
-        this.answer2.set(answer2);
-    }
-    public void setAnswer3(Answer answer3){
-        this.answer3.set(answer3);
-    }
-    public void setAnswer4(Answer answer4){
-        this.answer4.set(answer4);
-    }
-
-    public void setUserInfo(User usr){
-        this.usr = usr;
-    }
-
-    public User getUserInfo(){
-        return this.usr;
-    }
 
     public void loadUser(){
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference()
@@ -106,7 +61,6 @@ public class ProblemViewModel {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User u = dataSnapshot.getValue(User.class);
-                setUserInfo(u);
                 user.set(u);
             }
 
@@ -118,147 +72,34 @@ public class ProblemViewModel {
         myRef.addListenerForSingleValueEvent(userListener);
     }
 
-    public void uploadUser(){
+
+    public void updateScore(long s){
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference()
-                .child("users").child("12345");
-        myRef.setValue(usr);
-    }
-
-    public void setAnswer1Info(Answer a1){
-        this.a1 = a1;
-    }
-
-    public Answer getAnswer1Info(){
-        return this.a1;
-    }
-
-    public void loadAnswer1(){
-        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference()
-                .child("questions").child("q"+randChild).child("answers").child("a1");
-
-        ValueEventListener answer1Listener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Answer a = dataSnapshot.getValue(Answer.class);
-                setAnswer1Info(a);
-                answer1.set(a);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.e(TAGLOG, "Error!", databaseError.toException());
-            }
-        };
-
-        myRef.addListenerForSingleValueEvent(answer1Listener);
-    }
-
-    public void setAnswer2Info(Answer a2){
-        this.a2 = a2;
-    }
-
-    public Answer getAnswer2Info(){
-        return this.a2;
-    }
-
-    public void loadAnswer2(){
-        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference()
-                .child("questions").child("q"+randChild).child("answers").child("a2");
-
-        ValueEventListener answer1Listener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Answer a = dataSnapshot.getValue(Answer.class);
-                setAnswer2Info(a);
-                answer2.set(a);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.e(TAGLOG, "Error!", databaseError.toException());
-            }
-        };
-
-        myRef.addListenerForSingleValueEvent(answer1Listener);
-    }
-
-    public void setAnswer3Info(Answer a3){
-        this.a3 = a3;
-    }
-
-    public Answer getAnswer3Info(){
-        return this.a3;
-    }
-
-    public void loadAnswer3(){
-        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference()
-                .child("questions").child("q"+randChild).child("answers").child("a3");
-
-        ValueEventListener answer1Listener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Answer a = dataSnapshot.getValue(Answer.class);
-                setAnswer3Info(a);
-                answer3.set(a);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.e(TAGLOG, "Error!", databaseError.toException());
-            }
-        };
-
-        myRef.addListenerForSingleValueEvent(answer1Listener);
-    }
-
-    public void setAnswer4Info(Answer a4) {
-        this.a4 = a4;
-    }
-
-    public Answer getAnswer4Info(){
-        return this.a4;
-    }
-
-    public void loadAnswer4(){
-        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference()
-                .child("questions").child("q"+randChild).child("answers").child("a4");
-
-        ValueEventListener answer1Listener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Answer a = dataSnapshot.getValue(Answer.class);
-                setAnswer4Info(a);
-                answer4.set(a);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.e(TAGLOG, "Error!", databaseError.toException());
-            }
-        };
-
-        myRef.addListenerForSingleValueEvent(answer1Listener);
-    }
-
-    public void setQuestionInfo(Question q){
-        this.q = q;
-    }
-    public Question getQuestionInfo(){
-        return this.q;
+                .child("users").child("12345").child("score");
+        myRef.setValue(s);
     }
 
     public void loadQuestion()
     {
-
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference()
-                .child("questions").child("q"+randChild);
+                .child("questions");
 
         ValueEventListener questionListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Question q = dataSnapshot.getValue(Question.class);
-                setQuestionInfo(q);
+
+                Random r = new Random();
+                int n = r.nextInt(((int) dataSnapshot.getChildrenCount()))+1;
+                Question q = dataSnapshot.child("q"+n).getValue(Question.class);
+                Answer a1 = dataSnapshot.child("q"+n).child("answers").child("a1").getValue(Answer.class);
+                Answer a2 = dataSnapshot.child("q"+n).child("answers").child("a2").getValue(Answer.class);
+                Answer a3 = dataSnapshot.child("q"+n).child("answers").child("a3").getValue(Answer.class);
+                Answer a4 = dataSnapshot.child("q"+n).child("answers").child("a4").getValue(Answer.class);
                 question.set(q);
+                answer1.set(a1);
+                answer2.set(a2);
+                answer3.set(a3);
+                answer4.set(a4);
             }
 
             @Override
@@ -269,4 +110,54 @@ public class ProblemViewModel {
 
         myRef.addListenerForSingleValueEvent(questionListener);
     }
+
+    public boolean onAnswerClick(Context context,int op) {
+        switch (op)
+        {
+            case 1:
+                if(answer1.get().isRight()){
+                            Toast.makeText(context, "CORRECTO!!!!! ganas " + question.get().getPoints()+" puntos", Toast.LENGTH_SHORT).show();
+                            updateScore(user.get().getScore() + question.get().getPoints());
+                        }else{
+                            Toast.makeText(context, "INCORRECTO!!!!! pierdes "+ question.get().getPoints()+" puntos", Toast.LENGTH_SHORT).show();
+                            updateScore(user.get().getScore() - question.get().getPoints());
+                        }
+                break;
+            case 2:
+                if(answer2.get().isRight()){
+                    Toast.makeText(context, "CORRECTO!!!!! ganas " + question.get().getPoints()+" puntos", Toast.LENGTH_SHORT).show();
+                    updateScore(user.get().getScore() + question.get().getPoints());
+                }else{
+                    Toast.makeText(context, "INCORRECTO!!!!! pierdes "+ question.get().getPoints()+" puntos", Toast.LENGTH_SHORT).show();
+                    updateScore(user.get().getScore() - question.get().getPoints());
+                }
+                break;
+            case 3:
+                if(answer3.get().isRight()){
+                    Toast.makeText(context, "CORRECTO!!!!! ganas " + question.get().getPoints()+" puntos", Toast.LENGTH_SHORT).show();
+                    updateScore(user.get().getScore() + question.get().getPoints());
+                }else{
+                    Toast.makeText(context, "INCORRECTO!!!!! pierdes "+ question.get().getPoints()+" puntos", Toast.LENGTH_SHORT).show();
+                    updateScore(user.get().getScore() - question.get().getPoints());
+                }
+                break;
+            case 4:
+                if(answer4.get().isRight()){
+                    Toast.makeText(context, "CORRECTO!!!!! ganas " + question.get().getPoints()+" puntos", Toast.LENGTH_SHORT).show();
+                    updateScore(user.get().getScore() + question.get().getPoints());
+                }else{
+                    Toast.makeText(context, "INCORRECTO!!!!! pierdes "+ question.get().getPoints()+" puntos", Toast.LENGTH_SHORT).show();
+                    updateScore(user.get().getScore() - question.get().getPoints());
+                }
+                break;
+            default:
+                Toast.makeText(context,"SE ACABÓ EL TIEMPO!!! pierdes "+question.get().getPoints()+" puntos",Toast.LENGTH_LONG).show();
+                updateScore(user.get().getScore() - question.get().getPoints());
+                break;
+        }
+
+        return true;
+    }
+
+
 }

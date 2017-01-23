@@ -5,18 +5,6 @@
         <variable
             name="problemVM"
             type="com.problemonute.problemonute.viewmodels.ProblemViewModel"/>
-        <variable
-            name="ans1"
-            type="com.problemonute.problemonute.viewmodels.ProblemViewModel"/>
-        <variable
-            name="ans2"
-            type="com.problemonute.problemonute.viewmodels.ProblemViewModel"/>
-        <variable
-            name="ans3"
-            type="com.problemonute.problemonute.viewmodels.ProblemViewModel"/>
-        <variable
-            name="ans4"
-            type="com.problemonute.problemonute.viewmodels.ProblemViewModel"/>
     </data>
     <LinearLayout
         xmlns:tools="http://schemas.android.com/tools"
@@ -100,15 +88,14 @@
                     android:id="@+id/answer1"
                     android:layout_width="187dp"
                     android:layout_height="match_parent"
-                    android:text="@{ans1.answer1.text}"
+                    android:text="@{problemVM.answer1.text}"
                     android:gravity="center"
-                    android:background="@drawable/border_style"
-                    auto:engine="KaTeX"/>
+                    android:background="@drawable/border_style"/>
                 <io.github.kexanie.library.MathView
                     android:id="@+id/answer2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="@{ans2.answer2.text}"
+                    android:text="@{problemVM.answer2.text}"
                     android:gravity="center"
                     android:background="@drawable/border_style"
                     auto:engine="KaTeX"/>
@@ -121,7 +108,7 @@
                     android:id="@+id/answer3"
                     android:layout_width="187dp"
                     android:layout_height="match_parent"
-                    android:text="@{ans3.answer3.text}"
+                    android:text="@{problemVM.answer3.text}"
                     android:gravity="center"
                     android:background="@drawable/border_style"
                     auto:engine="KaTeX"/>
@@ -129,7 +116,7 @@
                     android:id="@+id/answer4"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="@{ans4.answer4.text}"
+                    android:text="@{problemVM.answer4.text}"
                     android:gravity="center"
                     android:background="@drawable/border_style"
                     auto:engine="KaTeX"/>

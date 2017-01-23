@@ -18,7 +18,7 @@ public class TestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityTestBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_test);
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        //FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         if (tvm == null) tvm = new TestViewModel();
         tvm.loadQuestion();
         binding.setTestVM(tvm);
