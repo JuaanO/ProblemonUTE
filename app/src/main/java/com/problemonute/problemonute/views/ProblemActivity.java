@@ -43,11 +43,13 @@ public class ProblemActivity extends AppCompatActivity {
         binding.setProblemVM(pvm);
 
         textViewTime.setText("01:00:00");
+        timer.start();
 
         answer1View.setOnTouchListener(
                 (v, event) -> {
                     pvm.onAnswerClick(getApplicationContext(),1);
                     returnMarker();
+                    timer.cancel();
                     return true;
                 }
 
@@ -57,6 +59,7 @@ public class ProblemActivity extends AppCompatActivity {
                 (v, event) -> {
                     pvm.onAnswerClick(getApplicationContext(),2);
                     returnMarker();
+                    timer.cancel();
                     return true;
                 }
         );
@@ -65,6 +68,7 @@ public class ProblemActivity extends AppCompatActivity {
                 (v, event) -> {
                     pvm.onAnswerClick(getApplicationContext(),3);
                     returnMarker();
+                    timer.cancel();
                     return true;
                 }
         );
@@ -73,17 +77,20 @@ public class ProblemActivity extends AppCompatActivity {
                 (v, event) -> {
                     pvm.onAnswerClick(getApplicationContext(),4);
                     returnMarker();
+                    timer.cancel();
                     return true;
                 }
         );
 
 
-        timer.start();
+
     }
 
     @Override
     public void onBackPressed() {
         returnMarker();
+        pvm.onAnswerClick(getApplicationContext(),6);
+        timer.cancel();
         super.onBackPressed();
     }
 
@@ -111,11 +118,6 @@ public class ProblemActivity extends AppCompatActivity {
         public void onFinish(){
             pvm.onAnswerClick(getApplicationContext(),5);
             returnMarker();
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
             finish();
         }
 

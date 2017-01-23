@@ -13,7 +13,6 @@ public class Question {
     private long points;
     private int difficulty_level;
     private String category;
-//    private List<Answer> answers;
 
     public Question() {
     }
